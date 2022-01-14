@@ -1,4 +1,3 @@
-from ast import Try
 import time
 import serial
 
@@ -56,7 +55,7 @@ def end_comm():
     is_inited = False
 
 
-#########################################
+######################################### 
 # read those test cases to              #
 # under stand the module a bit more     #
 # Thanks                                #
