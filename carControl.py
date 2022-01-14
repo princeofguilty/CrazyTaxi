@@ -56,12 +56,26 @@ def end_comm():
     is_inited = False
 
 
+#########################################
+# read those test cases to              #
+# under stand the module a bit more     #
+# Thanks                                #
+#########################################
 
-
-# def test__():
+# def test0__():
 #     init_comm()
 #     car_go("f")
 #     end_comm()
 
+# test0__()
 
-# test__()
+# def test1__():
+#     init_comm()
+#     while True:
+#         mm = input("enter msg: ")
+#         car_go(mm) # ex : mm = "b"
+#         if mm == "end":
+#             break
+#     end_comm()
+
+# test1__()
