@@ -54,7 +54,7 @@ void loop() {
   if (Serial.available() > 0) {
     delay(60);
     g_incomingstr = Serial.readStringUntil('\n');
-    Serial.println("btts");  
+    Serial.println("CAR-> " + g_incomingstr);  
   }
   if (g_incomingstr != "") {
     processData();
