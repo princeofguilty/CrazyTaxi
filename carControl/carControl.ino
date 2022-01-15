@@ -3,7 +3,7 @@
 #define CAR_LEFT      4
 #define CAR_RIGHT     3
 
-String g_incomingstr = ""; // for incoming serial data
+char g_incomingChar = ""; // for incoming serial data
 
 void setup() {
   pinMode(CAR_FORWARD, OUTPUT);
@@ -27,37 +27,53 @@ void resetCarMovement(){
 }
 
 void processData(){
-  if(g_incomingstr == "s"){
+  if(g_incomingChar == 6){ // stop
     resetCarMovement();
     return;
   }
-  if(g_incomingstr == "f"){
+  if(g_incomingChar == 0){ // forward
     digitalWrite(CAR_BACKWARD, LOW);
     digitalWrite(CAR_FORWARD, HIGH);
   }
-  else if(g_incomingstr == "b"){
+  else if(g_incomingChar == 1){ // backward
     digitalWrite(CAR_FORWARD, LOW);
     digitalWrite(CAR_BACKWARD, HIGH);
   }
-  if(g_incomingstr == "r"){
+  else if(g_incomingChar == 2){ // right forward
     digitalWrite(CAR_LEFT, LOW);
     digitalWrite(CAR_RIGHT,HIGH);
+    digitalWrite(CAR_BACKWARD, LOW);
+    digitalWrite(CAR_FORWARD, HIGH);
   }
-  else if(g_incomingstr == "l"){
+  else if(g_incomingChar == 3){ // left forward
     digitalWrite(CAR_RIGHT, LOW);
     digitalWrite(CAR_LEFT,HIGH);
+    digitalWrite(CAR_BACKWARD, LOW);
+    digitalWrite(CAR_FORWARD, HIGH);
+  }
+  else if(g_incomingChar == 4){ // right backward
+    digitalWrite(CAR_LEFT, LOW);
+    digitalWrite(CAR_RIGHT,HIGH);
+    digitalWrite(CAR_FORWARD, LOW);
+    digitalWrite(CAR_BACKWARD, HIGH);
+  }
+  else if(g_incomingChar == 5){ // left backward
+    digitalWrite(CAR_RIGHT, LOW);
+    digitalWrite(CAR_LEFT,HIGH);
+    digitalWrite(CAR_FORWARD, LOW);
+    digitalWrite(CAR_BACKWARD, HIGH);
   }
 }
 
 void loop() {
-  g_incomingstr= "";
+  g_incomingChar= ' ';
   if (Serial.available() > 0) {
     delay(60);
-    g_incomingstr = Serial.readStringUntil('\n');
-    Serial.println("CAR-> " + g_incomingstr);  
+    g_incomingChar = Serial.read();
+    g_incomingChar -= '0';
   }
-  if (g_incomingstr != "") {
+  if (g_incomingChar != ' ') {
     processData();
   }
-  //delay(50);
+  delay(50);
 }
